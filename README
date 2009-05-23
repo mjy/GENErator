@@ -1,0 +1,40 @@
+h1. GENErator
+
+h2. Overview
+
+GENErator was initially coded March 2009 and onwards by Matt Yoder for, and initialy concieved by, John Freudenstein (Ohio State, Dept. of Ecology and Evolutionary Biology). Initially, its sole purpose was to provide a mechanism by which sequence data (DNA) from different files could be easily manually assembled into a larger file.  Some additional automation has since been added.
+
+h2. Installation
+
+While this is a ROR application it is meant to be run from the desktop, though you could of course run it on a server.  It was not initially intended to be a full blown application but rather a quickly concieved and executed utility to serve a single purpose.  There is no test suite, if the general functionality is useful to others it will likely be ported to mx (see http://sourceforge.net/projects/mx-database) where testing etc. would make more sense.
+
+GENErator uses mysql, could likely use any backend with a little tweaking. Modify the environment or use the defaults like so:
+
+ create database generator_development;
+
+and give it permissions:
+
+ GRANT ALL PRIVILEGES ON generator_development.* TO 'generator'@'localhost' IDENTIFIED BY 'zap';
+ 
+Then exit out and migrate:
+
+ rake db:migrate RAILS_ENV=development
+
+And fire it up:
+
+ ruby script/server
+
+To use, open your browswer and navigate to localhost:
+
+ http://127.0.0.1:3000/
+
+h2. Usage
+
+GENErator reads FASTA files.  Click on 'files/filters' and load a file, providing an (arbitrary) gene name.  Repeat as necessary.  Click "work".  For a given terminal pick the sequences you want, provide a name (defaults to the terminal label of the leftmost gene if none provided), and click "add".  Previously chosen sequences are highlighted in green.  Repeat as necessary.  
+
+To output you results, or see advanced filters/functions, click again on files/filters.  Click status to show the presently created matrix and some stats on the FASTA files.  "Reset" clears the generated matrix, but not the input FASTA files.  "Nuke" deletes everything returning a clean slate. 
+
+Only one generated matrix can be worked on at a time.  Persisting derived matrices or storing sequence sets is additional functionality that should be done in a more robust framework (again, see mx as a possible candidate).
+
+It is also possible to add FASTA files via a Rake task, see the task for an explanation.
+

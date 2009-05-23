@@ -8,6 +8,8 @@ h2. Installation
 
 While this is a ROR application it is meant to be run from the desktop, though you could of course run it on a server.  It was not initially intended to be a full blown application but rather a quickly concieved and executed utility to serve a single purpose.  There is no test suite, if the general functionality is useful to others it will likely be ported to mx (see http://sourceforge.net/projects/mx-database) where testing etc. would make more sense.
 
+You'll need to have the BIORuby gem installed, see http://bioruby.open-bio.org/.
+
 GENErator uses mysql, could likely use any backend with a little tweaking. Modify the environment or use the defaults like so:
 
  create database generator_development;

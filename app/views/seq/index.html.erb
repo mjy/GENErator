@@ -1,0 +1,21 @@
+  <% form_remote_tag :url => {:action => :add} do -%>
+    <div style="font-size: smaller; border-bottom: 2px dotted silver; padding-bottom: 4px;">
+    <% @seqs.keys.each do |genes| -%>
+      <div class="gene_col">
+        <b><%= genes -%></b><br/>
+        <div style="height:400px; width:200px; overflow:auto;"> 
+          <% @seqs[genes].each_with_index do |g, i| -%>
+            <%= render :partial => 'seq', :locals => {:i => i, :g => g, :genes => genes} -%>
+     
+        <% end %>
+       </div>
+      </div>
+    <% end %>
+
+    <br style="clear:both;" />
+
+    terminal name: <%= text_field_tag("name") -%>
+
+    <%= submit_tag "add" -%> <div id='export_items_count' style="display:inline;"> <%= render :partial => 'count_export_items', :locals => {:count => @total_export_items} -%> </div>
+  </div>
+  <% end %>

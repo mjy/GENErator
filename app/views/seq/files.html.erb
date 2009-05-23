@@ -1,0 +1,75 @@
+<fieldset>
+  <legend>Input</legend>
+    <% form_tag 'files',  {:multipart => true, :class => 'form'} do -%>
+        <table style="padding:10  px;">
+        <tr><td> input a file </td>
+         <td>  <%= file_field_tag 'file', :size => 70  -%> </td></tr>
+          <tr><td > for gene</td><td style="float:left;"> <%= text_field_tag(:gene, nil,  :size => 40) -%></td></tr>
+        </table>
+      <%= submit_tag('load', :name => 'load', :class => 'button' ) -%> or  <%= submit_tag('replace', :name => 'replace', :class => 'button') -%>
+    <% end -%>
+</fieldset>
+
+
+  <% if @seqs.size > 0 -%>
+
+<fieldset>
+  <legend>Output</legend>
+
+   <% form_tag '/seq/file', {:class => 'form'} do -%>
+      generate <%= submit_tag('source', :name => 'source_file', :class => 'button' ) -%> 
+              or <%= submit_tag('data', :name => 'file', :class => 'button') -%> 
+      file named <%= text_field_tag(:file_name, nil, :style => 'width: 200px;') -%> 
+    <% end -%>
+
+</fieldset>
+
+<fieldset>
+ <legend>Initializing</legend>
+ Automatically fill the matrix with terminals that have sequences for <i>every</i> gene: <%= link_to 'auto fill complete', :controller => :seq, :action => :autofill, :mode => :complete -%> <br/>
+ Automatically fill the matrix with every terminal, combining for those genes that are shared: <%= link_to 'auto fill all', :controller => :seq,  :action => :autofill, :mode => :all -%> <br/>
+</fieldset> 
+
+
+<fieldset>
+ <legend>Filters</legend>
+    <% form_tag '/seq/filter_by_motif',  { :class => 'form'} do -%>
+        <table style="padding:10px;">
+          <tr><td> filter by motif </td><td><%= text_field_tag 'motif', nil, {:size => 80}  -%> </td></tr>
+          <tr><td > for gene </td><td style="float:left;" ><%= select_tag 'gene', options_for_select(Seq.genes)  -%></td></tr>
+        </table>
+      <%= submit_tag('exclude', :name => 'exclude', :class => 'button' ) -%> or  <%= submit_tag('include', :name => 'include', :class => 'button') -%>
+    <% end -%>
+
+  <% form_tag '/seq/filter_by_mean_length',  { :class => 'form'} do -%>
+        <table style="padding:10px;">
+          <tr><td> filter by mean length for gene <%= select_tag 'gene', options_for_select(Seq.genes)  -%>
+              <%= submit_tag('exclude greater than', :name => 'greater_than', :class => 'button' ) -%> or  <%= submit_tag('exclude less than', :name => 'less_than', :class => 'button') -%> 
+              </td></tr>
+        </table>
+  <% end -%>
+
+  <% form_tag '/seq/filter_by_length',  { :class => 'form'} do -%>
+    <table style="padding:10px;">
+      <tr><td> filter by length </td><td><%= text_field_tag 'length', nil, {:size => 4}  -%> </td></tr>
+      <tr><td >for gene </td><td style="float:left;" ><%= select_tag 'gene', options_for_select(Seq.genes)  -%></td></tr>
+    </table>
+    <%= submit_tag('exclude greater than', :name => 'greater_than', :class => 'button' ) -%> or  <%= submit_tag('exclude less than', :name => 'less_than', :class => 'button') -%> 
+  <% end -%>
+
+
+</fieldset> 
+
+
+<fieldset>
+  <legend>Genes</legend>
+  <% form_tag '/seq/delete_gene',  { :class => 'form'} do -%>
+      <table style="padding:10  px;">
+      <tr><td> delete (removes all instances) </td><td><%= select_tag 'gene', options_for_select(Seq.genes)  -%>   <%= submit_tag('delete', :class => 'button' ) -%> </td></tr>
+      </table>
+  
+  <% end -%>
+</fieldset> 
+
+<% end -%>
+

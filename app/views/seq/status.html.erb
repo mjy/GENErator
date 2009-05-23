@@ -1,0 +1,43 @@
+<fieldset>
+  <legend>Current matrix</legend>
+  <table>
+    <tr><th>terminal</th><%= @genes.collect{|g| "<th>#{g}</th>"}.join("") -%></tr>
+      <% @export_items.each do |ei|-%>
+        <tr id="ei<%= "#{ei.id}" -%>">
+          <td><%=  ei.name -%></td>
+          <% @genes.each do |g| -%>
+            <td style="font-size:smaller;">
+              <% cr_seqs = ei.export_item_seqs.by_gene(g) -%>
+              <% if cr_seqs.size > 0 -%>
+                <%= cr_seqs.collect{|s| "#{s.seq.description}"}.join(',') -%>
+              <% else -%>
+                <span style="color:red;font-weight: stronger; background-color: #dedede; padding: 2px;">-</span>
+              <% end -%>
+            </td>
+          <% end -%>
+          <td><%= link_to_remote 'delete', :url => {:controller => :seq, :action => :delete_ei, :id => ei.id }-%></td>  
+        </tr>
+      <% end -%>
+  </table>
+</fieldset>
+
+<fieldset>
+  <legend>Genes</legend>
+  <p><i>all values are means </i> </p>
+  <table>
+    <tr><th>gene</th><th>mean length</th><th>gc percent</th><th>molecular weight</th><th>illegal_bases</th><th>a</th><th>c</th><th>g</th><th>t</th></tr>
+    <% @genes.each do |g| -%>
+      <% stats = Seq.bio_seq_mean_stats_by_gene(g) -%>
+    <tr>
+      <td> <%= g -%></td>
+      <td> <%= Seq.mean_length_by_gene(g) -%> </td>
+      <td> <%= stats[:gc_percent]  -%> </td>
+      <td> <%= stats[:molecular_weight]  -%> </td>
+      <td> <%= stats[:illegal_bases].join("") -%> </td>
+      <td> <%= stats[:a] -%> </td>
+      <td> <%= stats[:c] -%> </td>
+      <td> <%= stats[:g] -%> </td>
+      <td> <%= stats[:t] -%> </td>
+    </tr>
+  <% end -%>
+</fieldset>

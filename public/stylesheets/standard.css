@@ -1,0 +1,26 @@
+.form {
+float: left;
+ border:1px solid #aaddaa; font-size:smaller; padding: 2px; background-color: #dedede; width: 700px; margin: 2px; font-family: Courier; text-align:center;
+}
+
+.button {
+ font-size: smaller; padding: 0em; 
+}
+
+.pick_item {
+  padding: 1px; margin: 2px;
+}
+
+.header {
+ border-bottom: 2px dotted silver; padding-bottom: 5px;
+}
+
+/* with no data present */
+#empty {
+  padding: 10px; margin: 10px; width: 400px; text-align:center; background-color: red;
+}
+
+.gene_col {
+ float:left; padding: 20px; border-left: 2px dotted silver;
+}
+

@@ -1,0 +1,9 @@
+>A123123_Foo_bar
+ACGT
+
+>A2323_B23232_Blorf_stuff_2b
+ACTTTTTTTT
+
+>Blorf_stuff_231
+ACATT
+

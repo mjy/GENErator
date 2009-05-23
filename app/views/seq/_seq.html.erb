@@ -1,0 +1,4 @@
+<div class="pick_item" id="s<%= g.id -%>" style="background-color:<%= g.selected? ? '#aaddaa' : '#ffffff' -%>;">
+  <%= check_box_tag("seq[#{g.id}]", "#{genes}_#{i}") -%><%= g.name -%>
+</div>
+
